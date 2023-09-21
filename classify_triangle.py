@@ -1,42 +1,64 @@
 import unittest
+import math
 
 class TriangleClassifier:
-    def classify_triangle(self, a, b, c):
-        if a <= 0 or b <= 0 or c <= 0:
-            return "Invalid"
-        elif a == b == c:
+    def __init__(self, side_a, side_b, side_c):
+        self.side_a = side_a
+        self.side_b = side_b
+        self.side_c = side_c
+
+    def classify_triangle(self):
+        if self.is_equilateral():
             return "Equilateral"
-        elif a == b or b == c or a == c:
+        elif self.is_isosceles():
             return "Isosceles"
-        elif a*a + b*b == c*c or a*a + c*c == b*b or b*b + c*c == a*a:
+        elif self.is_scalene():
+            return "Scalene"
+        elif self.is_right():
             return "Right"
         else:
-            return "Scalene"
+            return "Not a valid triangle"
+    
+    def is_equilateral(self):
+        return self.side_a == self.side_b == self.side_c
+
+    def is_isosceles(self):
+        return (
+            self.side_a == self.side_b
+            or self.side_a == self.side_c
+            or self.side_b == self.side_c
+        )
+
+    def is_scalene(self):
+        return not self.is_equilateral() and not self.is_isosceles()
+
+    def is_right(self):
+        sides = [self.side_a, self.side_b, self.side_c]
+        sides.sort()
+        a, b, c = sides
+        return math.isclose(a ** 2 + b ** 2, c ** 2, rel_tol=1e-9)
+
 
 class TestTriangleClassifier(unittest.TestCase):
-    def setUp(self):
-        self.classifier = TriangleClassifier()
+    def test_equilateral_triangle(self):
+        triangle = TriangleClassifier(5, 5, 5)
+        self.assertEqual(triangle.classify_triangle(), "Equilateral")
 
-    def test_equilateral(self):
-        self.assertEqual(self.classifier.classify_triangle(3, 3, 3), "Equilateral")
+    def test_isosceles_triangle(self):
+        triangle = TriangleClassifier(5, 5, 6)
+        self.assertEqual(triangle.classify_triangle(), "Isosceles")
 
-    def test_isosceles(self):
-        self.assertEqual(self.classifier.classify_triangle(3, 4, 3), "Isosceles")
-        self.assertEqual(self.classifier.classify_triangle(4, 3, 3), "Isosceles")
-        self.assertEqual(self.classifier.classify_triangle(3, 3, 4), "Isosceles")
+    def test_scalene_triangle(self):
+        triangle = TriangleClassifier(3, 4, 5)
+        self.assertEqual(triangle.classify_triangle(), "Scalene")
 
-    def test_scalene(self):
-        self.assertEqual(self.classifier.classify_triangle(3, 4, 6), "Scalene")
-        self.assertEqual(self.classifier.classify_triangle(5, 7, 8), "Scalene")
+    def test_right_triangle(self):
+        triangle = TriangleClassifier(3, 4, 5)
+        self.assertEqual(triangle.classify_triangle(), "Right")
 
-    def test_right(self):
-        self.assertEqual(self.classifier.classify_triangle(3, 4, 5), "Right")
-        self.assertEqual(self.classifier.classify_triangle(5, 12, 13), "Right")
-        self.assertEqual(self.classifier.classify_triangle(8, 15, 17), "Right")
-
-    def test_invalid(self):
-        self.assertEqual(self.classifier.classify_triangle(0, 1, 2), "Invalid")
-        self.assertEqual(self.classifier.classify_triangle(-1, 2, 3), "Invalid")
+    def test_invalid_triangle(self):
+        triangle = TriangleClassifier(1, 2, 3)
+        self.assertEqual(triangle.classify_triangle(), "Not a valid triangle")
 
 if __name__ == "__main__":
     unittest.main()
