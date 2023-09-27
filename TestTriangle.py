@@ -27,5 +27,5 @@ class TestTriangleClassifier(unittest.TestCase):
         self.assertEqual(triangle.classify_triangle(), "Not a valid triangle")
 
 if __name__ == "__main__":
-    print("Everything is passed")
     unittest.main()
+    print("Everything is passed")
