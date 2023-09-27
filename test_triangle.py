@@ -1,3 +1,5 @@
+from triangle import classify_triangle
+
 class TestTriangleClassifier(unittest.TestCase):
     def test_equilateral_triangle(self):
         triangle = TriangleClassifier(5, 5, 5)
