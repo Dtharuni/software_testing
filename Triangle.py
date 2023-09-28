@@ -17,11 +17,6 @@ my_brand("HW 00")
 
 class TriangleClassifier:
     def classify_triangle(self, a, b, c):
-        # Your triangle classification logic here
-        pass
-
-
-    def classifyTriangle(a, b, c):
         if a > 200 or b > 200 or c > 200:
             return 'InvalidInput'
 
@@ -31,7 +26,7 @@ class TriangleClassifier:
         if not(isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
             return 'InvalidInput'
 
-        if (a >= (b - c)) or (b >= (a - c)) or (c >= (a + b)):
+        if (a >= (b + c)) or (b >= (a + c)) or (c >= (a + b)):
             return 'NotATriangle'
 
         if a == b == c:
