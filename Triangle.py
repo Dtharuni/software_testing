@@ -15,38 +15,27 @@ def my_brand(hw_name):
 my_brand("HW 00")
 
 class TriangleClassifier:
-    def __init__(self, side_a, side_b, side_c):
-        self.side_a = side_a
-        self.side_b = side_b
-        self.side_c = side_c
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
 
-    def classify_triangle(self):
+    def classify(self):
         if self.is_equilateral():
             return "Equilateral"
         elif self.is_isosceles():
             return "Isosceles"
-        elif self.is_scalene():
-            return "Scalene"
         elif self.is_right():
             return "Right"
         else:
-            return "Not a valid triangle"
-    
+            return "Scalene"
+        
     def is_equilateral(self):
-        return self.side_a == self.side_b == self.side_c
+        return self.a == self.b == self.c
 
     def is_isosceles(self):
-        return (
-            self.side_a == self.side_b
-            or self.side_a == self.side_c
-            or self.side_b == self.side_c
-        )
-
-    def is_scalene(self):
-        return not self.is_equilateral() and not self.is_isosceles()
+        return self.a == self.b or self.a == self.c or self.b == self.c
 
     def is_right(self):
-        sides = [self.side_a, self.side_b, self.side_c]
-        sides.sort()
-        a, b, c = sides
-        return math.isclose(a ** 2 + b ** 2, c ** 2, rel_tol=1e-9)
+        sides = sorted([self.a, self.b, self.c])
+        return math.isclose(sides[0] ** 2 + sides[1] ** 2, sides[2] ** 2)
