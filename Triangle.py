@@ -14,30 +14,31 @@ def my_brand(hw_name):
 
 my_brand("HW 00")
 
+
 class TriangleClassifier:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
+    def classify_triangle(self, a, b, c):
+        # Your triangle classification logic here
+        pass
 
-    def classify(self):
-        if self.a <= 0 or self.b <= 0 or self.c <= 0:
-            return "Invalid"
-        elif self.is_equilateral():
-            return "Equilateral"
-        elif self.is_isosceles():
-            return "Isosceles"
-        elif self.is_right():
-            return "Right"
+
+    def classifyTriangle(a, b, c):
+        if a > 200 or b > 200 or c > 200:
+            return 'InvalidInput'
+
+        if a <= 0 or b <= 0 or c <= 0:
+            return 'InvalidInput'
+
+        if not(isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
+            return 'InvalidInput'
+
+        if (a >= (b - c)) or (b >= (a - c)) or (c >= (a + b)):
+            return 'NotATriangle'
+
+        if a == b == c:
+            return 'Equilateral'
+        elif (a**2 + b**2) == (c**2):
+            return 'Right'
+        elif (a != b) and (b != c) and (a != c):
+            return 'Scalene'
         else:
-            return "Scalene"
-        
-    def is_equilateral(self):
-        return self.a == self.b == self.c
-
-    def is_isosceles(self):
-        return self.a == self.b or self.a == self.c or self.b == self.c
-
-    def is_right(self):
-        sides = sorted([self.a, self.b, self.c])
-        return math.isclose(sides[0] ** 2 + sides[1] ** 2, sides[2] ** 2)
+            return 'Isosceles'
