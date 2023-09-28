@@ -8,7 +8,7 @@ class TestTriangleClassifier(unittest.TestCase):
         print("test_equilateral_triangle is passed")
 
     def test_isosceles_triangle(self):
-        triangle = TriangleClassifier(5, 5, 6)
+        triangle = TriangleClassifier(5, 5, 8)
         self.assertEqual(triangle.classify_triangle(), "Isosceles")
         print("test_isosceles_triangle is passed")
 
@@ -23,7 +23,7 @@ class TestTriangleClassifier(unittest.TestCase):
         print("test_right_triangle is passed")
 
     def test_invalid_triangle(self):
-        triangle = TriangleClassifier(1, 2, 3)
+        triangle = TriangleClassifier(0, 0, 0)
         self.assertEqual(triangle.classify_triangle(), "Not a valid triangle")
 
 if __name__ == "__main__":
