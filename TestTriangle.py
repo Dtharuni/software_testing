@@ -13,7 +13,7 @@ class TestTriangleClassifier(unittest.TestCase):
         print("test_isosceles_triangle is passed")
 
     def test_scalene_triangle(self):
-        triangle = TriangleClassifier(3, 9, 4)
+        triangle = TriangleClassifier(7, 12, 15)
         self.assertEqual(triangle.classify_triangle(), "Scalene")
         print("test_scalene_triangle is passed")
 
