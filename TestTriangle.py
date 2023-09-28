@@ -18,12 +18,12 @@ class TestTriangleClassifier(unittest.TestCase):
         print("test_scalene_triangle is passed")
 
     def test_right_triangle(self):
-        triangle = TriangleClassifier(3, 4, 5)
+        triangle = TriangleClassifier(6, 8, 10)
         self.assertEqual(triangle.classify_triangle(), "Right")
         print("test_right_triangle is passed")
 
     def test_invalid_triangle(self):
-        triangle = TriangleClassifier(0, 0, 3)
+        triangle = TriangleClassifier(1, 10, 12)
         self.assertEqual(triangle.classify_triangle(), "Not a valid triangle")
 
 if __name__ == "__main__":
