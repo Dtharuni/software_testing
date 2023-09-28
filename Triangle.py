@@ -21,7 +21,9 @@ class TriangleClassifier:
         self.c = c
 
     def classify(self):
-        if self.is_equilateral():
+        if self.a <= 0 or self.b <= 0 or self.c <= 0:
+            return "Invalid"
+        elif self.is_equilateral():
             return "Equilateral"
         elif self.is_isosceles():
             return "Isosceles"
